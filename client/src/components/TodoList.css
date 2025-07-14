@@ -1,0 +1,162 @@
+.todo-list-container {
+  width: 100%;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Empty state styles */
+.empty-state {
+  text-align: center;
+  padding: var(--space-16) var(--space-4);
+  color: var(--text-secondary);
+  background-color: var(--background);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  margin: var(--space-4) 0;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.6;
+  filter: grayscale(0.3);
+}
+
+.empty-state h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  font-size: var(--font-size-base);
+  max-width: 28rem;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* List animations and layout */
+.todo-list > div {
+  transform-origin: center;
+}
+
+/* Staggered animation support */
+.todo-list > div:nth-child(1) { --delay: 0ms; }
+.todo-list > div:nth-child(2) { --delay: 50ms; }
+.todo-list > div:nth-child(3) { --delay: 100ms; }
+.todo-list > div:nth-child(4) { --delay: 150ms; }
+.todo-list > div:nth-child(5) { --delay: 200ms; }
+.todo-list > div:nth-child(n+6) { --delay: 250ms; }
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .empty-state {
+    padding: var(--space-12) var(--space-3);
+  }
+  
+  .empty-state-icon {
+    font-size: 3rem;
+  }
+  
+  .empty-state h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .empty-state p {
+    font-size: var(--font-size-sm);
+  }
+  
+  .todo-list {
+    gap: var(--space-2);
+  }
+}
+
+/* Enhanced hover effects for list items */
+.todo-list > div:hover {
+  z-index: 1;
+}
+
+/* Focus management for keyboard navigation */
+.todo-list:focus-within {
+  outline: none;
+}
+
+/* Loading state for individual items */
+.todo-list .loading-item {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.todo-list .loading-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .todo-list > div {
+    transition: none;
+  }
+  
+  .todo-list .loading-item::after {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .empty-state {
+    border-width: 3px;
+    border-color: var(--text-primary);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .empty-state {
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+  
+  .empty-state-icon {
+    opacity: 0.8;
+  }
+}
+
+/* Print styles */
+@media print {
+  .empty-state {
+    border: 1px solid #ccc;
+    background: white;
+  }
+  
+  .empty-state-icon {
+    display: none;
+  }
+}

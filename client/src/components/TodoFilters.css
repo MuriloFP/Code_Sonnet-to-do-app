@@ -1,0 +1,241 @@
+.todo-filters {
+  margin-bottom: var(--space-6);
+}
+
+.filters-container {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.filters-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: var(--space-2);
+  background-color: var(--secondary);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+}
+
+.filter-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex: 1;
+  justify-content: center;
+  min-height: 2.5rem;
+}
+
+.filter-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.filter-btn.active {
+  color: var(--primary);
+  background-color: var(--background);
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+}
+
+.filter-icon {
+  font-size: var(--font-size-base);
+  line-height: 1;
+}
+
+.filter-label {
+  white-space: nowrap;
+}
+
+.active-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  z-index: -1;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .filters-container {
+    padding: var(--space-4);
+  }
+  
+  .filter-buttons {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .filter-btn {
+    justify-content: flex-start;
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .filters-title {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-xs);
+  }
+  
+  .filter-icon {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Accessibility improvements */
+.filter-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.filter-buttons[role="tablist"] {
+  position: relative;
+}
+
+.filter-btn[role="tab"] {
+  position: relative;
+}
+
+.filter-btn[aria-selected="true"] {
+  color: var(--primary);
+}
+
+/* Enhanced hover effects */
+.filter-btn:hover:not(.active) {
+  transform: translateY(-1px);
+}
+
+.filter-btn:active {
+  transform: translateY(0);
+}
+
+/* Animation for filter changes */
+@keyframes filter-change {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.filter-btn.active {
+  animation: filter-change 0.2s ease-out;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .filters-container {
+    border-width: 2px;
+  }
+  
+  .filter-btn.active {
+    border: 2px solid var(--primary);
+  }
+  
+  .filter-buttons {
+    background-color: transparent;
+    border: 1px solid var(--border);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .filter-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .filter-buttons {
+    background-color: var(--surface);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .filter-btn {
+    transition: none;
+  }
+  
+  .filter-btn.active {
+    animation: none;
+  }
+  
+  .filter-btn:hover:not(.active) {
+    transform: none;
+  }
+  
+  .active-indicator {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .todo-filters {
+    display: none;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.filter-buttons:focus-within {
+  outline: none;
+}
+
+/* Loading state for filters */
+.filter-btn.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.filter-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: var(--space-2);
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid transparent;
+  border-top: 1px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translateY(-50%);
+}
+
+/* Improved touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .filter-btn {
+    min-height: 3rem;
+    padding: var(--space-3) var(--space-4);
+  }
+}

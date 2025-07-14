@@ -1,0 +1,222 @@
+.todo-form-container {
+  margin-bottom: var(--space-6);
+}
+
+.todo-form {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.todo-form:focus-within {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md), 0 0 0 3px rgb(99 102 241 / 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.input-container {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.todo-input {
+  flex: 1;
+  font-size: var(--font-size-lg);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  transition: all var(--transition-fast);
+  resize: none;
+  min-height: 3.5rem;
+}
+
+.todo-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.1);
+  transform: translateY(-1px);
+}
+
+.todo-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.add-btn {
+  min-width: 7rem;
+  height: 3.5rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+}
+
+.add-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.btn-icon {
+  font-size: var(--font-size-lg);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.btn-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.loading-spinner-sm {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.character-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: var(--space-1);
+}
+
+.character-count.warning {
+  color: var(--danger);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .todo-form {
+    padding: var(--space-4);
+  }
+  
+  .input-container {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .add-btn {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .todo-input {
+    font-size: var(--font-size-base);
+    padding: var(--space-3);
+  }
+}
+
+/* Enhanced focus styles for accessibility */
+.todo-input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.add-btn:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+/* Animation for form submission success */
+@keyframes success-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.todo-form.success {
+  animation: success-pulse 0.6s ease-out;
+}
+
+/* Hover effects for better interactivity */
+.todo-form:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.todo-input:hover:not(:focus) {
+  border-color: var(--primary-light);
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .todo-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+  }
+  
+  .loading-spinner-sm {
+    border-color: rgba(255, 255, 255, 0.2);
+    border-top-color: white;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .todo-form {
+    border-width: 2px;
+  }
+  
+  .todo-input {
+    border-width: 2px;
+  }
+  
+  .add-btn {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .todo-form,
+  .todo-input,
+  .add-btn {
+    transition: none;
+  }
+  
+  .loading-spinner-sm {
+    animation: none;
+  }
+  
+  .add-btn:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .todo-input:focus {
+    transform: none;
+  }
+}
