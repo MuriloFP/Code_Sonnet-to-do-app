@@ -143,3 +143,4 @@ temp/
 
 # Server data (keep structure but not actual data)
 server/data/todos.json
+.vercel
