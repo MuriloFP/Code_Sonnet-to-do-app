@@ -1,28 +1,20 @@
 {
-  "name": "code_sonnet_to-do-app",
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/build",
+  "installCommand": "npm install && cd client && npm install && cd ../server && npm install",
+  "functions": {
+    "server/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "client/build"
-      }
+      "source": "/api/(.*)",
+      "destination": "/server/index.js"
     },
     {
-      "src": "server/index.js",
-      "use": "@vercel/node"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/client/build/index.html"
-    }
-  ],
-  "installCommand": "npm install && cd client && npm install && cd ../server && npm install"
+  ]
 }
